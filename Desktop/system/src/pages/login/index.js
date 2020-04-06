@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import { Tabs, Form, Button, Input, Radio } from "antd"
-import style from "./index.css"
+import style from "./index.module.css"
+import './index.css'
 
 const { TabPane } = Tabs
 
@@ -27,7 +28,6 @@ class Login extends Component {
     })
   }
   render() {
-    console.log(style)
     const { radioValue } = this.state
     return (
       <div className={style.wrapper}>
