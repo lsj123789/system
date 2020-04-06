@@ -16,7 +16,7 @@ class Login extends Component {
   // 登录逻辑
   onLoginFinish = values => {
     console.log(values)
-    this.props.history.push("/student/home")
+    this.props.history.push("/student")
   }
   //注册逻辑
   onRegisterFinish = values => {
