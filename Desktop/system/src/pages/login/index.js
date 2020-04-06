@@ -1,6 +1,7 @@
 import React, { Component } from "react"
+import { withRouter } from "react-router-dom"
 import { Tabs, Form, Button, Input, Radio } from "antd"
-import "./index.css"
+import style from "./index.css"
 
 const { TabPane } = Tabs
 
@@ -14,6 +15,7 @@ class Login extends Component {
   // 登录逻辑
   onLoginFinish = values => {
     console.log(values)
+    this.props.history.push("/student/home")
   }
   //注册逻辑
   onRegisterFinish = values => {
@@ -25,10 +27,11 @@ class Login extends Component {
     })
   }
   render() {
+    console.log(style)
     const { radioValue } = this.state
     return (
-      <div className="wrapper">
-        <div className="tabs">
+      <div className={style.wrapper}>
+        <div className={style.tabs}>
           <Tabs defaultActiveKey="1">
             <TabPane tab="登录" key="1">
               <div>
@@ -164,4 +167,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login)
