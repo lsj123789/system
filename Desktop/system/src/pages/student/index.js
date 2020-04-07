@@ -27,16 +27,12 @@ class StudentHome extends Component {
     switch (componentKey) {
       case "":
         return <Home />
-        break
       case "item_0":
         return <Resume />
-        break
       case "item_1":
         return <Information />
-        break
       case "item_2":
         return <Analysis />
-        break
       default:
         return <Home />
     }
@@ -58,12 +54,15 @@ class StudentHome extends Component {
         <header className={styles.header}>
           <span className={styles.title}>高校毕业生就业信息管理系统</span>
           <Dropdown overlay={this.renderMenu()} className={styles.dropDown}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            <span
+              className="ant-dropdown-link"
+              onClick={e => e.preventDefault()}
+            >
               个人中心 <DownOutlined />
-            </a>
+            </span>
           </Dropdown>
         </header>
-        <div>{this.renderComponent()}</div>
+        <div className={styles.content}>{this.renderComponent()}</div>
       </div>
     )
   }
