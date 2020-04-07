@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import { Tabs, Form, Button, Input, Radio } from "antd"
-import style from "./index.module.css"
-import './index.css'
+import style from "./index.module.scss"
+// import './index.css'
 
 const { TabPane } = Tabs
 
@@ -90,7 +90,7 @@ class Login extends Component {
                   </Form.Item>
 
                   <Form.Item offset="8" span="16">
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" className='styles.button'>
                       登录
                     </Button>
                   </Form.Item>
