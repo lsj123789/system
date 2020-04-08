@@ -221,7 +221,7 @@ class Information extends Component {
           </Item>
           <Item
             label="职位名称（选填）"
-            name="positionNaME"
+            name="positionName"
             style={{ width: "30%", height: "60px" }}
           >
             <Input
@@ -296,7 +296,7 @@ class Information extends Component {
         >
           <Item
             label="项目名称"
-            name="companyName"
+            name="projectName"
             style={{ width: "30%", height: "60px" }}
           >
             <Input
