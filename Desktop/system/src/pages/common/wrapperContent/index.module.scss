@@ -1,0 +1,14 @@
+.wrapper{
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+    color: rgb(93, 213, 200);
+    font-size: 18px;
+    .line{
+        display: inline-block;
+        width: 3px;
+        height: 17px;
+        margin-right: 10px;
+        background-color: rgb(93, 213, 200);
+        margin-bottom: -3px;
+    }
+}

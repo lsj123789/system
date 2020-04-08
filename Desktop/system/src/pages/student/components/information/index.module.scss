@@ -1,0 +1,43 @@
+.wrapper {
+  background-color: #fff;
+  .header {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 0;
+    color: rgb(93, 213, 200);
+  }
+  .form {
+    padding: 20px 40px;
+    position: relative;
+    .radioButton {
+      width: 200px;
+      margin: 0 10px;
+      text-align: center;
+      height: 35px;
+    }
+    .basisButton {
+      width: 100px;
+      text-align: center;
+      background-color: rgb(93, 213, 200);
+      border: none;
+      border-radius: 30px;
+      position: absolute;
+      right: -830px;
+    }
+    .formButton {
+      width: 100px;
+      text-align: center;
+      background-color: rgb(93, 213, 200);
+      border: none;
+      border-radius: 30px;
+      position: absolute;
+      right: 20px;
+      bottom: -190px;
+    }
+  }
+}
+:global {
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    height: 37px !important;
+  }
+}

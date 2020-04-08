@@ -4,6 +4,7 @@ import { DownOutlined } from "@ant-design/icons"
 import { withRouter } from "react-router-dom"
 import Home from "./components/home/index"
 import Resume from "./components/resume/index"
+import Apply from "./components/apply/index"
 import Information from "./components/information/index"
 import Analysis from "./components/analysis/index"
 import styles from "./index.module.scss"
@@ -30,8 +31,10 @@ class StudentHome extends Component {
       case "item_0":
         return <Resume />
       case "item_1":
-        return <Information />
+        return <Apply />
       case "item_2":
+        return <Information />
+      case "item_3":
         return <Analysis />
       default:
         return <Home />
