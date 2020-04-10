@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import { Form, Input, Radio, Select, Button, DatePicker } from "antd"
+import axios from "axios"
+import url from "../../../../service.config"
 import WrapperContent from "../../../common/wrapperContent/index"
 import styles from "./index.module.scss"
 
@@ -30,13 +32,50 @@ class Information extends Component {
   //个人信息表单
   renderBasisForm = () => {
     const { basisButtonText, basisDisabled } = this.state
+    const { information } = this.props
+    const { username, basisInfo } = information
     const handleBasisInfo = values => {
-      console.log(values)
-      //当basisButtonText值为提交时 再发请求
+      const {
+        chineseName,
+        englishName,
+        age,
+        sex,
+        tel,
+        mail,
+        present,
+        identity
+      } = values
+      if (basisButtonText === "提交") {
+        axios({
+          url: url.postBasisInfo,
+          method: "post",
+          data: {
+            username,
+            chineseName,
+            englishName,
+            age,
+            sex,
+            tel,
+            mail,
+            present,
+            identity
+          }
+        })
+      }
       this.setState({
         basisButtonText: basisButtonText === "提交" ? "编辑" : "提交",
         basisDisabled: !basisDisabled
       })
+    }
+    const initialValues = {
+      chineseName: basisInfo.chineseName || "",
+      englishName: basisInfo.englishName || "",
+      age: basisInfo.age || "",
+      sex: basisInfo.sex || "",
+      tel: basisInfo.tel || "",
+      present: basisInfo.present || "",
+      mail: basisInfo.mail || "",
+      identity: basisInfo.identity || ""
     }
     return (
       <>
@@ -45,9 +84,7 @@ class Information extends Component {
           className={styles.form}
           layout="inline"
           name="basisInfo"
-          initialValues={{
-            remember: true
-          }}
+          initialValues={{ ...initialValues }}
           onFinish={values => handleBasisInfo(values)}
         >
           <Item
@@ -160,12 +197,47 @@ class Information extends Component {
   //实习经历表单
   renderExperience = () => {
     const { experienceButtonText, experienceDisabled } = this.state
+    const { information } = this.props
+    const { username, experienceInfo } = information
+    const initialValues = {
+      companyName: experienceInfo.companyName || "",
+      department: experienceInfo.department || "",
+      positionName: experienceInfo.positionName || "",
+      // positionTime: experienceInfo.positionTime || [],
+      practiceAchievement: experienceInfo.practiceAchievement || "",
+      practiceContent: experienceInfo.practiceContent || "",
+      trade: experienceInfo.trade || ""
+    }
     const handleExperience = values => {
-      console.log(values)
+      const {
+        companyName,
+        department,
+        positionName,
+        positionTime,
+        practiceAchievement,
+        practiceContent,
+        trade
+      } = values
       this.setState({
         experienceButtonText: experienceButtonText === "提交" ? "编辑" : "提交",
         experienceDisabled: !experienceDisabled
       })
+      if (experienceButtonText === "提交") {
+        axios({
+          url: url.postExperience,
+          method: "post",
+          data: {
+            username,
+            companyName,
+            department,
+            positionName,
+            positionTime,
+            practiceAchievement,
+            practiceContent,
+            trade
+          }
+        })
+      }
     }
     return (
       <>
@@ -174,9 +246,7 @@ class Information extends Component {
           className={styles.form}
           layout="inline"
           name="experience"
-          initialValues={{
-            remember: true
-          }}
+          initialValues={{ ...initialValues }}
           onFinish={values => handleExperience(values)}
         >
           <Item
@@ -276,15 +346,48 @@ class Information extends Component {
 
   //项目经历
   renderProject = () => {
+    const { projectButtonText, projectDisabled } = this.state
+    const { information } = this.props
+    const { projectInfo, username } = information
+    const initialValues = {
+      cosplay: projectInfo.cosplay || "",
+      link: projectInfo.link || "",
+      period: projectInfo.period || [],
+      projectAchievement: projectInfo.projectAchievement || "",
+      projectContent: projectInfo.projectContent || "",
+      projectName: projectInfo.projectName || ""
+    }
     const handleProject = values => {
-      console.log(values)
+      const {
+        cosplay,
+        link,
+        period,
+        projectAchievement,
+        projectContent,
+        projectName
+      } = values
       const { projectButtonText, projectDisabled } = this.state
       this.setState({
         projectDisabled: !projectDisabled,
         projectButtonText: projectButtonText === "提交" ? "编辑" : "提交"
       })
+      if (projectButtonText === "提交") {
+        axios({
+          method: "post",
+          url: url.postProject,
+          data: {
+            username,
+            cosplay,
+            link,
+            period,
+            projectAchievement,
+            projectContent,
+            projectName
+          }
+        })
+      }
     }
-    const { projectButtonText, projectDisabled } = this.state
+
     return (
       <>
         <WrapperContent title="项目经历" />
@@ -292,6 +395,7 @@ class Information extends Component {
           name="project"
           layout="inline"
           className={styles.form}
+          initialValues={{ ...initialValues }}
           onFinish={values => handleProject(values)}
         >
           <Item
@@ -384,12 +488,35 @@ class Information extends Component {
   //教育经历
   renderEducation = () => {
     const { educationButtonText, educationDisabled } = this.state
+    const { information } = this.props
+    const { username, educationInfo } = information
+    const initialValues = {
+      major: educationInfo.major || "",
+      school: educationInfo.school || "",
+      // schoolTime: educationInfo.schoolTime || [],
+      schoolExperience: educationInfo.schoolExperience || "",
+      record: educationInfo.record || ""
+    }
     const handleEducation = values => {
-      console.log(values)
+      const { major, school, schoolTime, schoolExperience, record } = values
       this.setState({
         educationButtonText: educationButtonText === "提交" ? "编辑" : "提交",
         educationDisabled: !educationDisabled
       })
+      if (educationButtonText === "提交") {
+        axios({
+          url: url.postEducation,
+          method: "post",
+          data: {
+            major,
+            username,
+            school,
+            schoolTime,
+            schoolExperience,
+            record
+          }
+        })
+      }
     }
     return (
       <>
@@ -398,6 +525,7 @@ class Information extends Component {
           className={styles.form}
           name="education"
           layout="inline"
+          initialValues={{ ...initialValues }}
           onFinish={values => handleEducation(values)}
         >
           <Item
@@ -471,13 +599,42 @@ class Information extends Component {
 
   // 志愿服务经历
   renderService = () => {
+    const { information } = this.props
+    const { username, serviceInfo } = information
+    const initialValues = {
+      serviceAchievement: serviceInfo.serviceAchievement || "",
+      serviceContent: serviceInfo.serviceContent || "",
+      serviceName: serviceInfo.serviceName || "",
+      serviceTime: serviceInfo.serviceTime || "",
+      servicePeriod: serviceInfo.servicePeriod || []
+    }
     const handleService = values => {
-      console.log(values)
+      const {
+        serviceAchievement,
+        serviceContent,
+        servicePeriod,
+        serviceName,
+        serviceTime
+      } = values
       const { serviceButtonText, serviceDisabled } = this.state
       this.setState({
         serviceDisabled: !serviceDisabled,
         serviceButtonText: serviceButtonText === "提交" ? "编辑" : "提交"
       })
+      if (serviceButtonText === "提交") {
+        axios({
+          method: "post",
+          url: url.postService,
+          data: {
+            username,
+            serviceAchievement,
+            serviceContent,
+            servicePeriod,
+            serviceName,
+            serviceTime
+          }
+        })
+      }
     }
     const { serviceButtonText, serviceDisabled } = this.state
     return (
@@ -487,6 +644,7 @@ class Information extends Component {
           name="service"
           layout="inline"
           className={styles.form}
+          initialValues={{ ...initialValues }}
           onFinish={values => handleService(values)}
         >
           <Item

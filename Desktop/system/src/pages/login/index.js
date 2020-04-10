@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
-import { Tabs, Form, Button, Input, Radio } from "antd"
+import axios from "axios"
+import url from "../../service.config"
+import { Tabs, Form, Button, Input, Radio, message } from "antd"
 import style from "./index.module.scss"
-// import './index.css'
 
 const { TabPane } = Tabs
 
@@ -13,14 +14,61 @@ class Login extends Component {
       radioValue: 1
     }
   }
+  formRef = React.createRef()
   // 登录逻辑
   onLoginFinish = values => {
-    console.log(values)
-    this.props.history.push("/student")
+    const { username, password, role } = values
+    axios({
+      method: "post",
+      url: url.loginUser,
+      headers: { "Content-type": "application/json" },
+      data: {
+        username,
+        password,
+        role
+      }
+    })
+      .then(res => {
+        console.log(res)
+        if (res.data.code === 200) {
+          message.success("登录成功！")
+          if (res.data.role === 2) {
+            this.props.history.push({ pathname: "/student" + username })
+          } else if (res.data.role === 1) {
+            this.props.history.push({ pathname: "/company" + username })
+          }
+        } else if (res.data.code === 202) {
+          message.error("密码错误，请重新输入")
+        } else if (res.data.code === 201) {
+          message.error("用户名不存在，请先注册")
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   //注册逻辑
   onRegisterFinish = values => {
-    console.log(values)
+    const { username, password, role } = values
+    axios({
+      method: "post",
+      url: url.registerUser,
+      header: { "Content-type": "application/json" },
+      data: {
+        username,
+        password,
+        role
+      }
+    })
+      .then(res => {
+        if (res.data.code === 200) {
+          message.success("注册成功，快去登录吧！")
+          this.formRef.current.resetFields()
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   radioValueChange = e => {
     this.setState({
@@ -90,7 +138,11 @@ class Login extends Component {
                   </Form.Item>
 
                   <Form.Item offset="8" span="16">
-                    <Button type="primary" htmlType="submit" className='styles.button'>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="styles.button"
+                    >
                       登录
                     </Button>
                   </Form.Item>
@@ -104,6 +156,7 @@ class Login extends Component {
                     remember: true
                   }}
                   onFinish={this.onRegisterFinish}
+                  ref={this.formRef}
                   //   onFinishFailed={onFinishFailed}
                 >
                   <Form.Item

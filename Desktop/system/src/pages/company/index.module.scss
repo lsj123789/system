@@ -1,0 +1,27 @@
+.wrapper {
+  height: 100%;
+  .header {
+    height: 55px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: rgb(32, 35, 41);
+    position: relative;
+    .title {
+      font-size: 22px;
+      color: rgb(93, 213, 200);
+      font-weight: bold;
+    }
+    .dropDown {
+      position: absolute;
+      right: 20px;
+      color: white;
+      font-size: 17px;
+      top: 13px;
+      cursor: pointer;
+    }
+  }
+  .content {
+    padding: 20px 40px;
+    background-color: rgb(246, 246, 248);
+  }
+}
