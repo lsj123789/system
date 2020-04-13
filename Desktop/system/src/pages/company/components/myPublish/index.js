@@ -74,7 +74,7 @@ class MyPublish extends Component {
   }
 
   render() {
-    return <div className={styles.wrapper}>{this.renderPublishCard()}</div>
+    return <>{this.renderPublishCard()}</>
   }
 }
 
