@@ -38,7 +38,7 @@ class Company extends Component {
       case "item_0":
         return <PublishPos username={username} />
       case "item_1":
-        return <MyPublish />
+        return <MyPublish username={username} />
       case "item_2":
         return <Analysis />
       case "item_3":

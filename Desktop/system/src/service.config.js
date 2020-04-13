@@ -15,7 +15,8 @@ const url = {
   getEducation: SERVICE + "studentEducation/getEducation",
   getService: SERVICE + "studentService/getService",
   //企业子系统
-  publishPos: SERVICE + "company/publishPos"
+  publishPos: SERVICE + "company/publishPos",
+  getMyPublish: SERVICE + "company/getMyPublish"
 }
 
 export default url
