@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: white;
+  height: 98%;
+  padding: 20px 40px;
+  border-radius: 20px;
+  .formButton {
+    width: 150px;
+    text-align: center;
+    background-color: rgb(93, 213, 200);
+    border: none;
+    border-radius: 30px;
+    position: absolute;
+    right: 40%;
+  }
+}

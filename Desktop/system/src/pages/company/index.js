@@ -13,9 +13,18 @@ class Company extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      componentKey: ""
+      componentKey: "",
+      username: ""
     }
   }
+
+  componentDidMount() {
+    const { username } = this.props.match.params
+    this.setState({
+      username
+    })
+  }
+
   handleMenuClick = e => {
     this.setState({
       componentKey: e.key
@@ -23,12 +32,12 @@ class Company extends Component {
   }
 
   renderComponent = () => {
-    const { componentKey } = this.state
+    const { componentKey, username } = this.state
     switch (componentKey) {
       case "":
         return <Home />
       case "item_0":
-        return <PublishPos />
+        return <PublishPos username={username} />
       case "item_1":
         return <MyPublish />
       case "item_2":
