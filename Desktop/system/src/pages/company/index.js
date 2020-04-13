@@ -41,10 +41,8 @@ class Company extends Component {
       case "item_1":
         return <MyPublish />
       case "item_2":
-        return <Information />
-      case "item_3":
         return <Analysis />
-      case "item_4":
+      case "item_3":
         return this.props.history.push("/")
       default:
         return <Home />
@@ -56,7 +54,6 @@ class Company extends Component {
       <Menu onClick={this.handleMenuClick}>
         <Menu.Item>发布职位</Menu.Item>
         <Menu.Item>我的发布</Menu.Item>
-        <Menu.Item>基本资料</Menu.Item>
         <Menu.Item>竞争力分析</Menu.Item>
         <Menu.Item>退出登录</Menu.Item>
       </Menu>
