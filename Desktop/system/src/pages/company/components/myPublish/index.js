@@ -1,11 +1,8 @@
 import React, { Component } from "react"
-// import { Tabs } from "antd"
 import { MessageOutlined } from "@ant-design/icons"
 import axios from "axios"
 import url from "../../../../service.config"
 import styles from "./index.module.scss"
-
-// const { TabPane } = Tabs
 
 class MyPublish extends Component {
   constructor(props) {

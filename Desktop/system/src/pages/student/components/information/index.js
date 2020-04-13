@@ -126,10 +126,10 @@ class Information extends Component {
             style={{ width: "70%", height: "60px" }}
           >
             <Group buttonStyle="outline" disabled={basisDisabled}>
-              <Radio.Button value="male" className={styles.radioButton}>
+              <Radio.Button value="男" className={styles.radioButton}>
                 男
               </Radio.Button>
-              <Radio.Button value="female" className={styles.radioButton}>
+              <Radio.Button value="女" className={styles.radioButton}>
                 女
               </Radio.Button>
             </Group>
@@ -151,10 +151,10 @@ class Information extends Component {
             style={{ width: "30%", height: "60px" }}
           >
             <Select placeholder="请选择" disabled={basisDisabled}>
-              <Option value="demission">离职-随时到岗</Option>
-              <Option value="putAside">在职-暂不考虑</Option>
-              <Option value="consider">在职-考虑机会</Option>
-              <Option value="duty">在职-月内到岗</Option>
+              <Option value="离职-随时到岗">离职-随时到岗</Option>
+              <Option value="在职-暂不考虑">在职-暂不考虑</Option>
+              <Option value="在这-考虑机会">在职-考虑机会</Option>
+              <Option value="在职-月内到岗">在职-月内到岗</Option>
             </Select>
           </Item>
           <Item
@@ -269,13 +269,13 @@ class Information extends Component {
               placeholder="请选择公司所属行业"
               disabled={experienceDisabled}
             >
-              <Option value="software">计算机软件</Option>
-              <Option value="ec">电子商务</Option>
-              <Option value="food">食品</Option>
-              <Option value="travel">旅游</Option>
-              <Option value="advertisement">广告营销</Option>
-              <Option value="logistical ">物流</Option>
-              <Option value="secure">信息安全</Option>
+              <Option value="计算机软件">计算机软件</Option>
+              <Option value="电子商务">电子商务</Option>
+              <Option value="食品">食品</Option>
+              <Option value="旅游">旅游</Option>
+              <Option value="广告营销">广告营销</Option>
+              <Option value="物流 ">物流</Option>
+              <Option value="信息安全">信息安全</Option>
             </Select>
           </Item>
           <Item
@@ -556,12 +556,12 @@ class Information extends Component {
             style={{ width: "30%", height: "60px" }}
           >
             <Select placeholder="学历要求" disabled={educationDisabled}>
-              <Option value="middle">初中及以下</Option>
-              <Option value="senior">高中</Option>
-              <Option value="regular">本科</Option>
-              <Option value="master">硕士</Option>
-              <Option value="doctor">博士</Option>
-              <Option value="postDoctor">博士后</Option>
+              <Option value="初中及以下">初中及以下</Option>
+              <Option value="高中">高中</Option>
+              <Option value="本科">本科</Option>
+              <Option value="硕士">硕士</Option>
+              <Option value="博士">博士</Option>
+              <Option value="博士后">博士后</Option>
             </Select>
           </Item>
           <Item label="在校时间" name="schoolTime" style={{ width: "60%" }}>
