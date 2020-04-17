@@ -16,7 +16,11 @@ const url = {
   getService: SERVICE + "studentService/getService",
   //企业子系统
   publishPos: SERVICE + "company/publishPos",
-  getMyPublish: SERVICE + "company/getMyPublish"
+  getMyPublish: SERVICE + "company/getMyPublish",
+  // 管理员子系统
+  getAllPublishInfo: SERVICE + "company/getAllPublishInfo",
+  passPublishInfo: SERVICE + "company/passPublishInfo",
+  deletePublishInfo: SERVICE + "company/deletePublishInfo"
 }
 
 export default url

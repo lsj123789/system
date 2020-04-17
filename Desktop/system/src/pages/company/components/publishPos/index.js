@@ -220,10 +220,13 @@ class PublishPos extends Component {
           username,
           companyInfo,
           positionInfo,
-          personalInfo: { ...values }
+          personalInfo: { ...values },
+          condition: false
         }
       }).then(() => {
-        message.success('提交成功，请等待管理员审核，审核成功后可到个人中心->我的发布中查看已发布职位')
+        message.success(
+          "提交成功，请等待管理员审核，审核成功后可到个人中心->我的发布中查看已发布职位"
+        )
         this.formRef.current.resetFields()
       })
     }

@@ -1,0 +1,73 @@
+.wrapper {
+  // height: 100%;
+  background-color: #f6f6f8;
+  .header {
+    height: 55px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: rgb(32, 35, 41);
+    position: relative;
+    .title {
+      font-size: 22px;
+      color: rgb(93, 213, 200);
+      font-weight: bold;
+    }
+    .dropDown {
+      position: absolute;
+      right: 20px;
+      color: white;
+      font-size: 17px;
+      top: 13px;
+      cursor: pointer;
+    }
+  }
+  .tabs {
+    text-align: center;
+    .card {
+      text-align: left;
+      cursor: pointer;
+      margin: 0 30px 30px 30px;
+      padding: 20px 40px;
+      background-color: #fff;
+      display: flex;
+      border-radius: 10px;
+      .leftContent {
+        flex-basis: 50%;
+        .position {
+          color: rgb(93, 213, 200);
+          margin: 10px 0;
+          font-size: 18px;
+        }
+        .line {
+          margin: 0 10px;
+        }
+        .salary {
+          color: red;
+          font-size: 18px;
+        }
+        .contact {
+          background-color: #f0f0f0;
+          padding: 5px 10px;
+          border-radius: 20px;
+          margin-left: 10px;
+          svg {
+            color: rgb(93, 213, 200);
+            height: 16px;
+            margin-right: 3px;
+          }
+        }
+      }
+      .rightContent {
+        flex-basis: 50%;
+        .company {
+          color: rgb(93, 213, 200);
+          margin: 10px 0;
+          font-size: 18px;
+        }
+        span {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

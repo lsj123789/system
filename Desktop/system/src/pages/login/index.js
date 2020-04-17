@@ -29,18 +29,19 @@ class Login extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         if (res.data.code === 200) {
           message.success("登录成功！")
           if (res.data.role === 2) {
             this.props.history.push({ pathname: "/student" + username })
           } else if (res.data.role === 1) {
             this.props.history.push({ pathname: "/company" + username })
+          } else if (res.data.role === 3) {
+            this.props.history.push({ pathname: "/manage" + username })
           }
         } else if (res.data.code === 202) {
           message.error("密码错误，请重新输入")
         } else if (res.data.code === 201) {
-          message.error("用户名不存在，请先注册")
+          message.error("用户名不存在或用户角色不匹配，请检查后再登录")
         }
       })
       .catch(err => {
@@ -200,7 +201,7 @@ class Login extends Component {
                       onChange={this.radioValueChange}
                       // defaultValue={radioValue}
                     >
-                      <Radio value={1}>企业</Radio>
+                     <Radio value={1}>企业</Radio>
                       <Radio value={2}>毕业生</Radio>
                     </Radio.Group>
                   </Form.Item>
