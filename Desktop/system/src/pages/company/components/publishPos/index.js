@@ -53,6 +53,7 @@ class PublishPos extends Component {
         >
           <Select placeholder="请选择公司所属行业">
             <Option value="计算机软件">计算机软件</Option>
+            <Option value="互联网">互联网</Option>
             <Option value="电子商务">电子商务</Option>
             <Option value="食品">食品</Option>
             <Option value="旅游">旅游</Option>
@@ -72,7 +73,7 @@ class PublishPos extends Component {
             <Option value="A轮">A轮</Option>
             <Option value="B轮">B轮</Option>
             <Option value="C轮">C轮</Option>
-            <Option value="D轮">D轮及以上</Option>
+            <Option value="D轮及以上">D轮及以上</Option>
             <Option value="不需要融资">不需要融资</Option>
           </Select>
         </Item>

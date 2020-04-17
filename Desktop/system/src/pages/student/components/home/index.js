@@ -1,7 +1,10 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
-import { MessageOutlined } from "@ant-design/icons"
-import { Input, Select } from "antd"
+import axios from "axios"
+import url from "../../../../service.config"
+import DetailModal from "../../../manage/components/detailModal/index"
+import { MessageOutlined, WarningOutlined } from "@ant-design/icons"
+import { Input, Select, Button } from "antd"
 import styles from "./index.module.scss"
 
 const { Search } = Input
@@ -10,27 +13,100 @@ const { Option } = Select
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      positionInfo: [],
+      detailModalVisible: false,
+      detailModalInfo: {}
+    }
   }
+
+  componentDidMount() {
+    axios({
+      url: url.getPassPublishInfo,
+      method: "get",
+      params: { condition: true }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
+  }
+
+  cancelDetailModal = () => {
+    this.setState({
+      detailModalVisible: false
+    })
+  }
+
   // 筛选学历
   filterRecord = values => {
-    console.log(values)
+    axios({
+      method: "get",
+      url: url.getByEducational,
+      params: {
+        educational: values
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
   }
   //筛选薪资
   filterSalary = values => {
-    console.log(values)
+    axios({
+      method: "get",
+      url: url.getBySalary,
+      params: {
+        pay: values
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
   }
   //筛选融资阶段
   filterFinance = values => {
-    console.log(values)
+    axios({
+      method: "get",
+      url: url.getByFinance,
+      params: {
+        finance: values
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
   }
   //筛选公司规模
   filterScale = values => {
-    console.log(values)
+    axios({
+      method: "get",
+      url: url.getByScale,
+      params: {
+        scale: values
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
   }
   //筛选公司行业
   filterCompany = values => {
-    console.log(values)
+    axios({
+      method: "get",
+      url: url.getByTrade,
+      params: {
+        trade: values
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
   }
 
   renderFilter = () => {
@@ -105,42 +181,94 @@ class Home extends Component {
       </div>
     )
   }
+
   renderCard = () => {
-    return (
+    const { positionInfo } = this.state
+
+    const showDetailModal = item => {
+      this.setState({
+        detailModalVisible: true,
+        detailModalInfo: item
+      })
+    }
+
+    return positionInfo.length === 0 ? (
       <div className={styles.card}>
-        <div className={styles.leftContent}>
-          <div className={styles.position}>网络安全专家</div>
-          <div>
-            <span className={styles.salary}>10-20k</span>
-            <span className={styles.line}>|</span>
-            <span>本科</span>
-            <span className={styles.contact}>
-              <MessageOutlined />
-              <span>李先生 | 前端工程师</span>
-            </span>
-          </div>
-        </div>
-        <div className={styles.rightContent}>
-          <div className={styles.company}>华为</div>
-          <div>
-            <span>移动互联网</span>
-            <span>|</span>
-            <span>已上市</span>
-            <span>|</span>
-            <span>10000人以上</span>
-          </div>
-        </div>
+        <WarningOutlined
+          style={{ marginTop: "6px", marginRight: "10px", color: "yellow" }}
+        />
+        <span style={{ textAlign: "center", fontSize: "16px" }}>
+          暂无该条件下的招聘信息，敬请等待~
+        </span>
       </div>
+    ) : (
+      positionInfo.map(item => {
+        return (
+          <div
+            className={styles.card}
+            key={item._id}
+            onClick={() => {
+              showDetailModal(item)
+            }}
+          >
+            <div className={styles.leftContent}>
+              <div className={styles.position}>
+                {item.positionInfo.positionName}
+              </div>
+              <div>
+                <span className={styles.salary}>{item.positionInfo.pay}</span>
+                <span className={styles.line}>|</span>
+                <span>{item.positionInfo.educational}</span>
+                <span className={styles.contact}>
+                  <MessageOutlined />
+                  <span>
+                    {item.personalInfo.personalName} |{" "}
+                    {item.personalInfo.personPos}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div className={styles.rightContent}>
+              <div className={styles.company}>
+                {item.companyInfo.companyName}
+              </div>
+              <div>
+                <span>{item.companyInfo.trade}</span>
+                <span>|</span>
+                <span>{item.companyInfo.finance}</span>
+                <span>|</span>
+                <span>{item.companyInfo.scale}</span>
+              </div>
+            </div>
+          </div>
+        )
+      })
     )
   }
 
+  handleSearch = value => {
+    axios({
+      method: "get",
+      url: url.searchPositionInfo,
+      params: {
+        companyName: value,
+        positionName: value
+      }
+    }).then(res => {
+      this.setState({
+        positionInfo: res.data
+      })
+    })
+  }
+
   render() {
+    const { detailModalVisible, detailModalInfo } = this.state
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <Search
             placeholder="搜索职位、公司"
-            onSearch={value => console.log(value)}
+            onSearch={value => this.handleSearch(value)}
             enterButton
             size="large"
             className={styles.search}
@@ -148,6 +276,21 @@ class Home extends Component {
           {this.renderFilter()}
           {this.renderCard()}
         </div>
+        <DetailModal
+          title="招聘信息详情"
+          visible={detailModalVisible}
+          detailInfo={detailModalInfo}
+          onCancel={this.cancelDetailModal}
+          modalFooter={
+            <Button
+              key="取消"
+              size="large"
+              onClick={() => this.cancelDetailModal()}
+            >
+              取消
+            </Button>
+          }
+        />
       </div>
     )
   }

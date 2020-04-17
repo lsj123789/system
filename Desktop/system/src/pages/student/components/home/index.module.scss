@@ -19,10 +19,12 @@
     }
   }
   .card {
+    cursor: pointer;
     padding: 20px 40px;
     background-color: #fff;
     display: flex;
     border-radius: 10px;
+    margin: 0 20px 20px 20px;
     .leftContent {
       flex-basis: 50%;
       .position {

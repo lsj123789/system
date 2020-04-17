@@ -14,6 +14,13 @@ const url = {
   getProject: SERVICE + "studentProject/getProject",
   getEducation: SERVICE + "studentEducation/getEducation",
   getService: SERVICE + "studentService/getService",
+  getPassPublishInfo: SERVICE + "company/getPassPublishInfo",
+  getByEducational: SERVICE + "company/getByEducational",
+  getBySalary: SERVICE + "company/getBySalary",
+  getByTrade: SERVICE + "company/getByTrade",
+  getByScale: SERVICE + "company/getByScale",
+  getByFinance: SERVICE + "company/getByFinance",
+  searchPositionInfo: SERVICE + "company/searchPositionInfo",
   //企业子系统
   publishPos: SERVICE + "company/publishPos",
   getMyPublish: SERVICE + "company/getMyPublish",
