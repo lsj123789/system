@@ -22,6 +22,7 @@ let studentProject = require("./controller/studentProject")
 let studentEducation = require("./controller/studentEducation")
 let studentService = require("./controller/studentService")
 let company = require("./controller/company")
+let resume = require('./controller/resume')
 
 let router = new Router()
 router.use("/user", user.routes())
@@ -31,6 +32,7 @@ router.use("/studentProject", studentProject.routes())
 router.use("/studentEducation", studentEducation.routes())
 router.use("/studentService", studentService.routes())
 router.use("/company", company.routes())
+router.use('/resume',resume.routes())
 app.use(router.routes())
 app.use(router.allowedMethods()) //接受get就是get post就是post
 
