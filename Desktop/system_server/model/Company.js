@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const companySchema = new Schema({
   username: String,
+  condition:Boolean,
   companyInfo: {
     companyDesc: String,
     companyName: String,

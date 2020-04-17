@@ -8,7 +8,7 @@ router.post("/loginUser", async ctx => {
   const password = loginUser.password
   const role = loginUser.role
   const User = mongoose.model("User")
-  await User.findOne({ $or: [{ username: username }, { role: role }] })
+  await User.findOne({ $and: [{ username: username }, { role: role }] })
     .exec()
     .then(async result => {
       if (result) {
