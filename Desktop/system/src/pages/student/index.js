@@ -101,11 +101,18 @@ class StudentHome extends Component {
       educationInfo,
       serviceInfo
     }
+    const resume = {
+      basisInfo,
+      experienceInfo,
+      projectInfo,
+      educationInfo,
+      serviceInfo
+    }
     switch (componentKey) {
       case "":
-        return <Home />
+        return <Home username={username} />
       case "item_0":
-        return <Resume />
+        return <Resume resume={resume} />
       case "item_1":
         return <Apply />
       case "item_2":

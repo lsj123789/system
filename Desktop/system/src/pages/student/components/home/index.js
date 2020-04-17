@@ -4,7 +4,7 @@ import axios from "axios"
 import url from "../../../../service.config"
 import DetailModal from "../../../manage/components/detailModal/index"
 import { MessageOutlined, WarningOutlined } from "@ant-design/icons"
-import { Input, Select, Button } from "antd"
+import { Input, Select, Button, Upload, message } from "antd"
 import styles from "./index.module.scss"
 
 const { Search } = Input
@@ -261,6 +261,34 @@ class Home extends Component {
     })
   }
 
+  postResume = () => {
+    const { username } = this.props
+    const props = {
+      name: "file",
+      action: url.postResume,
+      headers: {
+        authorization: "authorization-text"
+      },
+      data: { username },
+      // 拦截文件上传
+      beforeUpload(file) {
+        return true
+      },
+      //上传文件改变时的状态
+      onChange(info) {
+        if (info.file.status !== "uploading") {
+          console.log(info.file, info.fileList)
+        }
+        if (info.file.status === "done") {
+          message.success(`${info.file.name} 上传成功！`)
+        } else if (info.file.status === "error") {
+          message.error(`${info.file.name} 上传失败！`)
+        }
+      }
+    }
+    return props
+  }
+
   render() {
     const { detailModalVisible, detailModalInfo } = this.state
     return (
@@ -281,15 +309,25 @@ class Home extends Component {
           visible={detailModalVisible}
           detailInfo={detailModalInfo}
           onCancel={this.cancelDetailModal}
-          modalFooter={
-            <Button
-              key="取消"
-              size="large"
-              onClick={() => this.cancelDetailModal()}
+          modalFooter={[
+            <Upload
+              key="投递简历"
+              className={styles.upload}
+              {...this.postResume()}
+              // showUploadList={true}
             >
+              <Button
+                size="large"
+                type="primary"
+                // onClick={() => this.postResume()}
+              >
+                投递简历
+              </Button>
+            </Upload>,
+            <Button key="取消" size="large" onClick={()=>this.cancelDetailModal()}>
               取消
             </Button>
-          }
+          ]}
         />
       </div>
     )
