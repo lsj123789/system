@@ -66,6 +66,11 @@ class MyPublish extends Component {
                 <span>|</span>
                 <span>{item.companyInfo.scale}</span>
               </div>
+              {item.condition === false ? (
+                <div className={styles.noPass}>暂未通过审核</div>
+              ) : (
+                <div className={styles.pass}>已通过审核</div>
+              )}
             </div>
           </div>
         )

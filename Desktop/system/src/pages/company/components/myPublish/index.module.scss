@@ -31,6 +31,7 @@
     }
   }
   .rightContent {
+    position: relative;
     flex-basis: 50%;
     .company {
       color: rgb(93, 213, 200);
@@ -39,6 +40,20 @@
     }
     span {
       margin-right: 10px;
+    }
+    .noPass {
+      position: absolute;
+      right: -20px;
+      bottom: 0;
+      color: red;
+      font-size: 17px;
+    }
+    .pass {
+      position: absolute;
+      right: -20px;
+      bottom: 0;
+      color: rgb(93, 213, 200);
+      font-size: 17px;
     }
   }
 }
