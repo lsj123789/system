@@ -267,6 +267,7 @@ class Home extends Component {
 
   postResume = () => {
     const { username } = this.props
+    const { detailModalInfo } = this.state
     Modal.confirm({
       title: "确定向该公司投递简历吗？",
       icon: <ExclamationCircleOutlined />,
@@ -279,7 +280,7 @@ class Home extends Component {
         axios({
           method: "post",
           url: url.postResume,
-          data: { username: username }
+          data: { username: username, id: detailModalInfo._id }
         }).then(() => {
           message.success("投递成功！")
           this.cancelDetailModal()
@@ -312,6 +313,7 @@ class Home extends Component {
             <Button
               size="large"
               type="primary"
+              key="投递简历"
               onClick={() => this.postResume()}
             >
               投递简历
