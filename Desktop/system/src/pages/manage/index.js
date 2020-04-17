@@ -63,7 +63,6 @@ class Manage extends Component {
   }
 
   handleDelete = id => {
-    console.log(id)
     Modal.confirm({
       title: "确定删除该条招聘信息吗？",
       icon: <ExclamationCircleOutlined />,

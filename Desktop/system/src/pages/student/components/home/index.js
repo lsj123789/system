@@ -3,8 +3,12 @@ import { withRouter } from "react-router-dom"
 import axios from "axios"
 import url from "../../../../service.config"
 import DetailModal from "../../../manage/components/detailModal/index"
-import { MessageOutlined, WarningOutlined } from "@ant-design/icons"
-import { Input, Select, Button, Upload, message } from "antd"
+import {
+  MessageOutlined,
+  WarningOutlined,
+  ExclamationCircleOutlined
+} from "@ant-design/icons"
+import { Input, Select, Button, Modal, message } from "antd"
 import styles from "./index.module.scss"
 
 const { Search } = Input
@@ -263,30 +267,25 @@ class Home extends Component {
 
   postResume = () => {
     const { username } = this.props
-    const props = {
-      name: "file",
-      action: url.postResume,
-      headers: {
-        authorization: "authorization-text"
-      },
-      data: { username },
-      // 拦截文件上传
-      beforeUpload(file) {
-        return true
-      },
-      //上传文件改变时的状态
-      onChange(info) {
-        if (info.file.status !== "uploading") {
-          console.log(info.file, info.fileList)
-        }
-        if (info.file.status === "done") {
-          message.success(`${info.file.name} 上传成功！`)
-        } else if (info.file.status === "error") {
-          message.error(`${info.file.name} 上传失败！`)
-        }
+    Modal.confirm({
+      title: "确定向该公司投递简历吗？",
+      icon: <ExclamationCircleOutlined />,
+      content: "",
+      okText: "确定",
+      okType: "primary",
+      cancelText: "取消",
+      onCancel() {},
+      onOk: () => {
+        axios({
+          method: "post",
+          url: url.postResume,
+          data: { username: username }
+        }).then(() => {
+          message.success("投递成功！")
+          this.cancelDetailModal()
+        })
       }
-    }
-    return props
+    })
   }
 
   render() {
@@ -310,21 +309,18 @@ class Home extends Component {
           detailInfo={detailModalInfo}
           onCancel={this.cancelDetailModal}
           modalFooter={[
-            <Upload
-              key="投递简历"
-              className={styles.upload}
-              {...this.postResume()}
-              // showUploadList={true}
+            <Button
+              size="large"
+              type="primary"
+              onClick={() => this.postResume()}
             >
-              <Button
-                size="large"
-                type="primary"
-                // onClick={() => this.postResume()}
-              >
-                投递简历
-              </Button>
-            </Upload>,
-            <Button key="取消" size="large" onClick={()=>this.cancelDetailModal()}>
+              投递简历
+            </Button>,
+            <Button
+              key="取消"
+              size="large"
+              onClick={() => this.cancelDetailModal()}
+            >
               取消
             </Button>
           ]}
