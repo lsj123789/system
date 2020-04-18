@@ -1,0 +1,24 @@
+.wrapper {
+  margin: 40px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  .header {
+    font-size: 22px;
+    color: rgb(93, 213, 200);
+    font-weight: bold;
+    text-align: center;
+  }
+  .progress {
+    margin: 50px;
+    display: flex;
+    .left {
+      flex-basis: 40%;
+      text-align: center;
+    }
+    .right {
+      font-size: 18px;
+      flex-basis: 50%;
+    }
+  }
+}
