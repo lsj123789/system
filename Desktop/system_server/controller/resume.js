@@ -13,4 +13,20 @@ router.post("/postResume", async ctx => {
   })
 })
 
+router.get("/getMyApplyId", async ctx => {
+  const Resume = mongoose.model("Resume")
+  const username = ctx.request.query.username
+  await Resume.find({ username }).then(res => {
+    ctx.body = res
+  })
+})
+
+router.get("/getMyApplyInfo", async ctx => {
+  const company = mongoose.model("Company")
+  const { applyId } = ctx.request.query
+  await company.findOne({  _id: applyId  }).then(res => {
+    ctx.body = res
+  })
+})
+
 module.exports = router
