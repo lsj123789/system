@@ -24,8 +24,16 @@ router.get("/getMyApplyId", async ctx => {
 router.get("/getMyApplyInfo", async ctx => {
   const company = mongoose.model("Company")
   const { applyId } = ctx.request.query
-  await company.findOne({  _id: applyId  }).then(res => {
+  await company.findOne({ _id: applyId }).then(res => {
     ctx.body = res
+  })
+})
+
+router.get("/getResumeUser", async ctx => {
+  const company = mongoose.model("Resume")
+  const { resumeId } = ctx.request.query
+  await company.find({ id: resumeId }).then(res => {
+    ctx.body = res.length !== 0 && res
   })
 })
 
