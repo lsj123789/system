@@ -1,32 +1,16 @@
 import React, { Component } from "react"
 import { MessageOutlined } from "@ant-design/icons"
-import axios from "axios"
-import url from "../../../../service.config"
+import WrapperContent from "../../../common/wrapperContent/index"
 import styles from "./index.module.scss"
 
 class MyPublish extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      myPublish: []
-    }
-  }
-
-  componentDidMount() {
-    const { username } = this.props
-    axios({
-      url: url.getMyPublish,
-      method: "get",
-      params: username
-    }).then(res => {
-      this.setState({
-        myPublish: res.data.data
-      })
-    })
+    this.state = {}
   }
 
   renderPublishCard = () => {
-    const { myPublish } = this.state
+    const { myPublish } = this.props
     return myPublish.length === 0 ? (
       <div className={styles.noCard}>
         <div className={styles.bg} />
@@ -35,46 +19,49 @@ class MyPublish extends Component {
         </div>
       </div>
     ) : (
-      myPublish.map(item => {
-        return (
-          <div className={styles.card} key={item._id}>
-            <div className={styles.leftContent}>
-              <div className={styles.position}>
-                {item.positionInfo.positionName}
-              </div>
-              <div>
-                <span className={styles.salary}>{item.positionInfo.pay}</span>
-                <span className={styles.line}>|</span>
-                <span>{item.positionInfo.educational}</span>
-                <span className={styles.contact}>
-                  <MessageOutlined />
-                  <span>
-                    {item.personalInfo.personalName} |{" "}
-                    {item.personalInfo.personPos}
+      <div className={styles.wrapper}>
+        <WrapperContent title="我发布的职位" />
+        {myPublish.map(item => {
+          return (
+            <div className={styles.card} key={item._id}>
+              <div className={styles.leftContent}>
+                <div className={styles.position}>
+                  {item.positionInfo.positionName}
+                </div>
+                <div>
+                  <span className={styles.salary}>{item.positionInfo.pay}</span>
+                  <span className={styles.line}>|</span>
+                  <span>{item.positionInfo.educational}</span>
+                  <span className={styles.contact}>
+                    <MessageOutlined />
+                    <span>
+                      {item.personalInfo.personalName} |{" "}
+                      {item.personalInfo.personPos}
+                    </span>
                   </span>
-                </span>
+                </div>
+              </div>
+              <div className={styles.rightContent}>
+                <div className={styles.company}>
+                  {item.companyInfo.companyName}
+                </div>
+                <div>
+                  <span>{item.companyInfo.trade}</span>
+                  <span>|</span>
+                  <span>{item.companyInfo.finance}</span>
+                  <span>|</span>
+                  <span>{item.companyInfo.scale}</span>
+                </div>
+                {item.condition === false ? (
+                  <div className={styles.noPass}>等待审核中</div>
+                ) : (
+                  <div className={styles.pass}>已通过审核</div>
+                )}
               </div>
             </div>
-            <div className={styles.rightContent}>
-              <div className={styles.company}>
-                {item.companyInfo.companyName}
-              </div>
-              <div>
-                <span>{item.companyInfo.trade}</span>
-                <span>|</span>
-                <span>{item.companyInfo.finance}</span>
-                <span>|</span>
-                <span>{item.companyInfo.scale}</span>
-              </div>
-              {item.condition === false ? (
-                <div className={styles.noPass}>暂未通过审核</div>
-              ) : (
-                <div className={styles.pass}>已通过审核</div>
-              )}
-            </div>
-          </div>
-        )
-      })
+          )
+        })}
+      </div>
     )
   }
 

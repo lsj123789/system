@@ -4,6 +4,9 @@ import Home from "./components/home/index"
 import PublishPos from "./components/publishPos/index"
 import MyPublish from "./components/myPublish/index"
 import Analysis from "./components/analysis/index"
+import Resume from "./components/resume/index"
+import axios from "axios"
+import url from "../../service.config"
 import { Menu, Dropdown } from "antd"
 import { DownOutlined } from "@ant-design/icons"
 import styles from "./index.module.scss"
@@ -13,14 +16,30 @@ class Company extends Component {
     super(props)
     this.state = {
       componentKey: "",
-      username: ""
+      username: "",
+      publishId: [],
+      myPublish: []
     }
   }
 
   componentDidMount() {
     const { username } = this.props.match.params
-    this.setState({
-      username
+    let idArr = []
+    axios({
+      url: url.getMyPublish,
+      method: "get",
+      params: username
+    }).then(res => {
+      let resArr = res.data.data
+      resArr.length !== 0 &&
+        resArr.map(item => {
+          return idArr.push(item._id)
+        })
+      this.setState({
+        myPublish: resArr,
+        username,
+        publishId: idArr
+      })
     })
   }
 
@@ -31,17 +50,19 @@ class Company extends Component {
   }
 
   renderComponent = () => {
-    const { componentKey, username } = this.state
+    const { componentKey, username, publishId, myPublish } = this.state
     switch (componentKey) {
       case "":
         return <Home />
       case "item_0":
         return <PublishPos username={username} />
       case "item_1":
-        return <MyPublish username={username} />
+        return <MyPublish username={username} myPublish={myPublish} />
       case "item_2":
         return <Analysis />
       case "item_3":
+        return <Resume publishId={publishId} />
+      case "item_4":
         return this.props.history.push("/")
       default:
         return <Home />
@@ -54,6 +75,7 @@ class Company extends Component {
         <Menu.Item>发布职位</Menu.Item>
         <Menu.Item>我的发布</Menu.Item>
         <Menu.Item>竞争力分析</Menu.Item>
+        <Menu.Item>收到的简历</Menu.Item>
         <Menu.Item>退出登录</Menu.Item>
       </Menu>
     )

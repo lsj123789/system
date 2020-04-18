@@ -27,6 +27,7 @@ const url = {
   //企业子系统
   publishPos: SERVICE + "company/publishPos",
   getMyPublish: SERVICE + "company/getMyPublish",
+  getResumeUser: SERVICE + "resume/getResumeUser",
   // 管理员子系统
   getAllPublishInfo: SERVICE + "company/getAllPublishInfo",
   passPublishInfo: SERVICE + "company/passPublishInfo",
