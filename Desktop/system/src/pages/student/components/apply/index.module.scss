@@ -1,0 +1,58 @@
+.wrapper {
+    .header{
+        margin-bottom: 20px;
+    }
+  .card {
+    padding: 20px 40px;
+    background-color: #fff;
+    display: flex;
+    border-radius: 10px;
+    margin: 0 20px 20px 20px;
+    .leftContent {
+      flex-basis: 50%;
+      .position {
+        color: rgb(93, 213, 200);
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .line {
+        margin: 0 10px;
+      }
+      .salary {
+        color: red;
+        font-size: 18px;
+      }
+      .contact {
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-left: 10px;
+        svg {
+          color: rgb(93, 213, 200);
+          height: 16px;
+          margin-right: 3px;
+        }
+      }
+    }
+    .rightContent {
+        position: relative;
+      flex-basis: 50%;
+      .company {
+        color: rgb(93, 213, 200);
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .alreadyApply{
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          svg{
+            color: rgb(93, 213, 200);
+          }
+      }
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+}

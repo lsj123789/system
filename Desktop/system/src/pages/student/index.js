@@ -20,7 +20,7 @@ class StudentHome extends Component {
       experienceInfo: {},
       projectInfo: {},
       educationInfo: {},
-      serviceInfo: {}
+      serviceInfo: {},
     }
   }
 
@@ -73,6 +73,7 @@ class StudentHome extends Component {
     })
   }
 
+
   handleMenuClick = e => {
     this.setState({
       componentKey: e.key
@@ -91,7 +92,7 @@ class StudentHome extends Component {
       experienceInfo,
       projectInfo,
       educationInfo,
-      serviceInfo
+      serviceInfo,
     } = this.state
     const information = {
       username,
@@ -110,11 +111,11 @@ class StudentHome extends Component {
     }
     switch (componentKey) {
       case "":
-        return <Home username={username} />
+        return <Home username={username}  />
       case "item_0":
         return <Resume resume={resume} />
       case "item_1":
-        return <Apply />
+        return <Apply username={username} />
       case "item_2":
         return <Information information={information} />
       case "item_3":

@@ -22,6 +22,8 @@ const url = {
   getByFinance: SERVICE + "company/getByFinance",
   searchPositionInfo: SERVICE + "company/searchPositionInfo",
   postResume: SERVICE + "resume/postResume",
+  getMyApplyId: SERVICE + "resume/getMyApplyId",
+  getMyApplyInfo: SERVICE + "resume/getMyApplyInfo",
   //企业子系统
   publishPos: SERVICE + "company/publishPos",
   getMyPublish: SERVICE + "company/getMyPublish",
