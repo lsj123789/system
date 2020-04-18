@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom"
 import Home from "./components/home/index"
 import PublishPos from "./components/publishPos/index"
 import MyPublish from "./components/myPublish/index"
-import Analysis from "./components/analysis/index"
 import Resume from "./components/resume/index"
 import axios from "axios"
 import url from "../../service.config"
@@ -59,10 +58,8 @@ class Company extends Component {
       case "item_1":
         return <MyPublish username={username} myPublish={myPublish} />
       case "item_2":
-        return <Analysis />
-      case "item_3":
         return <Resume publishId={publishId} />
-      case "item_4":
+      case "item_3":
         return this.props.history.push("/")
       default:
         return <Home />
@@ -74,7 +71,6 @@ class Company extends Component {
       <Menu onClick={this.handleMenuClick}>
         <Menu.Item>发布职位</Menu.Item>
         <Menu.Item>我的发布</Menu.Item>
-        <Menu.Item>竞争力分析</Menu.Item>
         <Menu.Item>收到的简历</Menu.Item>
         <Menu.Item>退出登录</Menu.Item>
       </Menu>
